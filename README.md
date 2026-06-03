@@ -128,7 +128,9 @@ Using the wrong client in the wrong context either silently fails auth (anon cli
 | Document | What it covers |
 |---|---|
 | [Case Study](src/docs/CASE_STUDY.md) | Full project narrative - problem, decisions, hard problems, lessons learned |
+| [Architecture Overview](ARCHITECTURE_OVERVIEW.md) | High-level system summary with layered topology diagrams |
 | [Architecture](src/docs/ARCHITECTURE.md) | System shape, codebase structure, DB schema, security layers |
+| [Diagrams](src/docs/DIAGRAMS.md) | Mermaid service-topology and checkout/payment-flow diagrams |
 | [PRD](src/docs/PRD.md) | Product requirements by phase, success metrics, constraints |
 | [Data Flow](src/docs/DATA_FLOW.md) | Request traces for checkout, auth, browsing, cart |
 | [State Management](src/docs/STATE_MANAGEMENT.md) | Zustand stores, React Context, URL params |

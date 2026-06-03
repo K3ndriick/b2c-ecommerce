@@ -3,6 +3,8 @@
 **Project:** PowerProShop E-Commerce Platform
 **Stack:** Next.js 16 · React 19 · TypeScript · Supabase · Stripe · Zustand · Tailwind CSS
 
+> **High-level overview.** This is the top-level summary of the system. For the detailed architecture (codebase structure, DB schema, RLS/security layers) see [src/docs/ARCHITECTURE.md](src/docs/ARCHITECTURE.md); for Mermaid topology and checkout diagrams see [src/docs/DIAGRAMS.md](src/docs/DIAGRAMS.md).
+
 ---
 
 ## System Layers

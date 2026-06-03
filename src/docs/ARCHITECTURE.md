@@ -1,6 +1,6 @@
 # Architecture
 
-This document covers the structural shape of PowerProShop: how the codebase is organised, how each layer communicates, how the database is designed, and how security is enforced. For request-level traces through specific user flows, see [DATA_FLOW.md](./DATA_FLOW.md). For client state management decisions, see [STATE_MANAGEMENT.md](./STATE_MANAGEMENT.md). For Mermaid diagrams of the service topology and checkout/payment flow, see [DIAGRAMS.md](./DIAGRAMS.md).
+This document covers the structural shape of PowerProShop: how the codebase is organised, how each layer communicates, how the database is designed, and how security is enforced. For a high-level summary, see the top-level [ARCHITECTURE_OVERVIEW.md](../../ARCHITECTURE_OVERVIEW.md). For request-level traces through specific user flows, see [DATA_FLOW.md](./DATA_FLOW.md). For client state management decisions, see [STATE_MANAGEMENT.md](./STATE_MANAGEMENT.md). For Mermaid diagrams of the service topology and checkout/payment flow, see [DIAGRAMS.md](./DIAGRAMS.md).
 
 ---
 
