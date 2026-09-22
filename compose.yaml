@@ -1,0 +1,44 @@
+services:
+  # ------------------------------------------------------------
+  # The Next.js app: built from your Dockerfile
+  # ------------------------------------------------------------
+  app:
+    build:
+      context: .
+      # Replaces the PowerShell $buildArgs snippet.
+      # ${VAR} is filled in from the env file passed with --env-file.
+      args:
+        NEXT_PUBLIC_SUPABASE_URL: ${NEXT_PUBLIC_SUPABASE_URL}
+        NEXT_PUBLIC_SUPABASE_ANON_KEY: ${NEXT_PUBLIC_SUPABASE_ANON_KEY}
+        NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: ${NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY}
+        NEXT_PUBLIC_GOOGLE_PLACES_API_KEY: ${NEXT_PUBLIC_GOOGLE_PLACES_API_KEY}
+        NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL}
+    image: powerproshop
+    ports:
+      - "3000:3000"
+    # Runtime secrets, same as `docker run --env-file`
+    env_file:
+      - .env.local
+    # `environment` OVERRIDES matching keys from env_file.
+    # This points email at the Mailpit container instead of Mailtrap.
+    environment:
+      MAILTRAP_HOST: mailpit        # the service name below, NOT localhost
+      MAILTRAP_PORT: "1025"
+      MAILTRAP_USER: dev
+      MAILTRAP_PASS: dev
+    depends_on:
+      - mailpit
+
+  # ------------------------------------------------------------
+  # Mailpit: fake SMTP server that catches every email
+  # ------------------------------------------------------------
+  mailpit:
+    image: axllent/mailpit:latest
+    ports:
+      - "8025:8025"   # web inbox → http://localhost:8025
+      - "1025:1025"   # SMTP, published so `npm run dev` can use it too
+    environment:
+      # email.ts always sends a username/password. Mailpit rejects
+      # auth by default, so tell it to accept anything (dev only!)
+      MP_SMTP_AUTH_ACCEPT_ANY: 1
+      MP_SMTP_AUTH_ALLOW_INSECURE: 1
