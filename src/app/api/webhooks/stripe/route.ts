@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
-import { stripe } from '@/lib/stripe/server';
+import { getStripeServer } from '@/lib/stripe/server';
 import { createAdminClient } from '@/lib/supabase/admin';
 import type { PendingCartItem } from '@/lib/actions/stripe';
 
@@ -25,7 +25,7 @@ export async function POST(request: NextRequest) {
   //    - if event.type === 'payment_intent.succeeded':
   //      call handlePaymentSucceeded(event.data.object as Stripe.PaymentIntent)
   try {
-    const event = stripe.webhooks.constructEvent(body, signature, process.env.STRIPE_WEBHOOK_SECRET!);
+    const event = getStripeServer().webhooks.constructEvent(body, signature, process.env.STRIPE_WEBHOOK_SECRET!);
 
     if (event?.type === "payment_intent.succeeded") {
       await handlePaymentSucceeded(event.data.object as Stripe.PaymentIntent);
@@ -88,7 +88,7 @@ async function handlePaymentSucceeded(paymentIntent: Stripe.PaymentIntent) {
       if (!reservationToCheck) {
         console.error(`Error: Reservation does not exist in system: ${reservationToCheckError}`);
 
-        await stripe.refunds.create({
+        await getStripeServer().refunds.create({
           payment_intent: paymentIntent.id
         });
         return;

@@ -1,6 +1,6 @@
 'use server';
 
-import { stripe } from '@/lib/stripe/server';
+import { getStripeServer } from '@/lib/stripe/server';
 import { stripeConfig } from '@/lib/stripe/config';
 import { ShippingAddress } from '../types';
 import { createAdminClient } from '../supabase/admin';
@@ -39,7 +39,7 @@ export const createPaymentIntent = async (amount: number, paymentIntentData: Pay
     //   - automatic_payment_methods: { enabled: true }
     //     (this lets Stripe show the right payment options for the customer's region)
     //
-    const paymentIntent = await stripe.paymentIntents.create({
+    const paymentIntent = await getStripeServer().paymentIntents.create({
       amount: Math.round(amount * 100),
       currency: stripeConfig.currency,
       automatic_payment_methods: { enabled: true }
