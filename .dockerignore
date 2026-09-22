@@ -1,0 +1,18 @@
+# Dependencies & build output: always rebuilt inside the container
+node_modules
+.next
+
+# Secrets: must never enter the build context
+.env*
+!.env.example
+
+# Not needed to build the app
+.git
+.vscode
+.claude
+.agents
+.mcp.json
+src/docs/private
+npm-debug.log*
+Dockerfile
+.dockerignore
