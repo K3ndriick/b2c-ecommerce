@@ -18,7 +18,7 @@ import { stripeConfig } from './config';
 
 let stripePromise: ReturnType<typeof loadStripe>;
 
-export const getStripe = () => {
+export const getStripeClient = () => {
     if (!stripePromise) {
     stripePromise = loadStripe(stripeConfig.publishableKey);
   }

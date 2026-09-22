@@ -9,7 +9,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Elements } from '@stripe/react-stripe-js';
-import { getStripe } from '@/lib/stripe/client';
+import { getStripeClient } from '@/lib/stripe/client';
 import { useAuth } from '@/lib/auth/auth-context';
 import { useCartStore } from '@/store/useCartStore';
 import { createPaymentIntent } from '@/lib/actions/stripe';
@@ -207,7 +207,7 @@ export default function CheckoutPage() {
 
             {(step === 2 && !reservationExpired && clientSecret && shippingAddress && paymentIntentId) && (
               <Elements
-                stripe={getStripe()}
+                stripe={getStripeClient()}
                 options={{ clientSecret }}
               >
                 <PaymentForm
